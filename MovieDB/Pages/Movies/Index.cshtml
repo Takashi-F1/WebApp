@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id:int?}"
 @model MovieDB.Pages.Movies.IndexModel
 
 @{
@@ -8,8 +8,21 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">新規追加</a>
 </p>
+
+@*検索窓UI作成*@
+<form>@*検索ボタンを押すとOnGetAsyncメソッドが呼び出される*@
+    <p>
+        <select asp-for="MovieGenre" asp-items="Model.Genres">
+            <option value="">All</option>
+        </select>
+        @Html.DisplayNameFor(model => model.Movie[0].Title):
+        <input type="text" asp-for="SearchString" />
+        <button type="submit">検索</button>
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
@@ -25,11 +38,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Movie[0].Price)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Rating)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Movie) {
+        @foreach (var item in Model.Movie)
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -44,11 +61,14 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">編集</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">詳細</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">削除</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>
