@@ -20,7 +20,7 @@ namespace MovieDB.Pages.Movies
             _context = context;
         }
 
-        [BindProperty]
+        [BindProperty]//クライアントから送信されてきたデータがMovieプロパティにバインドされる
         public Movie Movie { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
