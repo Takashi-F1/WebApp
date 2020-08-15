@@ -73,7 +73,7 @@ function check_cell(selected) {
               return [i, j];
             }
           } else {//CheckMyCell_valueが空セルの場合、その方向はチェックする必要ない
-            //alert("この方向には自分の石がありません")
+            //alert("この方向には自分の石がありません");
             break;
           }
         }
@@ -89,16 +89,29 @@ function check_cell(selected) {
   }
 }
 
+function all_check(){
+  var cell_list = document.getElementsByTagName("td");
+  //console.log(cell_list)
+  var count_ok = 0;//置くことができるセル数
+
+  for (c = 0; c < cell_list.length; c++) {//cell_list.length=64
+    if (check_cell(cell_list[c])[0] > 0) {
+      count_ok++;
+    }
+  }
+  document.getElementById("num_ok").innerText = count_ok;
+}
+
 /*set stone*/
 function setstone(selected) {
   var check_func = check_cell(selected);
   var i = check_func[0];
   var j = check_func[1];
   var playernum = document.getElementById("player").innerText;
-
+  //alert(i+" "+j);
   if (i < 0) {
     alert("このマスには置けません！　別のマスを選択してください");
-  } else if (i > 0) {
+  } else if (i >= 0) {
     for (var k = 0; k <= j; k++) {
       /*選択されたセルに石を置く＆挟んだ相手の石の色を変える*/
       document.getElementById(String(parseInt(selected.id) + direction[i] * k)).innerText = SymbolList[playernum - 1];
@@ -106,14 +119,13 @@ function setstone(selected) {
     document.getElementById("player").innerText = playernum % 2 + 1;
   }
   count_stone();
+  all_check();
 }
 
 
 /*置ける場所がない時はパス*/
-for (x = 1; x < 9; x++) {
-  for (y = 1; y < 9; y++) {
-    var cell_id = String(x) + String(y);
-    
-  }
+if(document.getElementById("num_ok").innerText=="0"){
+  alert("プレイヤー"+document.getElementById("player").innerText+"：　現在どこのマスにも置くことができません！")
 }
 
+/*勝利判定 */
