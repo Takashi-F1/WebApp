@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<style media="screen">
+  table,td {
+    border: solid 1px #aaaaaa;
+    border-collapse: collapse;
+    text-align: center;
+  }
+  td{
+    width:50px;
+    height: 50px;
+  }
+</style>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <div id="test"></div>
+  <h1>オセロ対戦ページ！</h1>
+  <h2>先攻は〇　後攻は✖</h2>
+  <h3>プレイヤー<span id="player">1</span>の番です</h3>
+  <table>
+    <tr>
+      <td id="11" onclick="setstone(this);"></td>
+      <td id="12" onclick="setstone(this);"></td>
+      <td id="13" onclick="setstone(this);"></td>
+      <td id="14" onclick="setstone(this);"></td>
+      <td id="15" onclick="setstone(this);"></td>
+      <td id="16" onclick="setstone(this);"></td>
+      <td id="17" onclick="setstone(this);"></td>
+      <td id="18" onclick="setstone(this);"></td>
+    </tr>
+    <tr>
+      <td id="21" onclick="setstone(this);"></td>
+      <td id="22" onclick="setstone(this);"></td>
+      <td id="23" onclick="setstone(this);"></td>
+      <td id="24" onclick="setstone(this);"></td>
+      <td id="25" onclick="setstone(this);"></td>
+      <td id="26" onclick="setstone(this);"></td>
+      <td id="27" onclick="setstone(this);"></td>
+      <td id="28" onclick="setstone(this);"></td>
+    </tr>
+    <tr>
+      <td id="31" onclick="setstone(this);"></td>
+      <td id="32" onclick="setstone(this);"></td>
+      <td id="33" onclick="setstone(this);"></td>
+      <td id="34" onclick="setstone(this);"></td>
+      <td id="35" onclick="setstone(this);"></td>
+      <td id="36" onclick="setstone(this);"></td>
+      <td id="37" onclick="setstone(this);"></td>
+      <td id="38" onclick="setstone(this);"></td>
+    </tr>
+    <tr>
+      <td id="41" onclick="setstone(this);"></td>
+      <td id="42" onclick="setstone(this);"></td>
+      <td id="43" onclick="setstone(this);"></td>
+      <td id="44" onclick="setstone(this);">〇</td>
+      <td id="45" onclick="setstone(this);">✖</td>
+      <td id="46" onclick="setstone(this);"></td>
+      <td id="47" onclick="setstone(this);"></td>
+      <td id="48" onclick="setstone(this);"></td>
+    </tr>
+    <tr>
+      <td id="51" onclick="setstone(this);"></td>
+      <td id="52" onclick="setstone(this);"></td>
+      <td id="53" onclick="setstone(this);"></td>
+      <td id="54" onclick="setstone(this);">✖</td>
+      <td id="55" onclick="setstone(this);">〇</td>
+      <td id="56" onclick="setstone(this);"></td>
+      <td id="57" onclick="setstone(this);"></td>
+      <td id="58" onclick="setstone(this);"></td>
+    </tr>
+    <tr>
+      <td id="61" onclick="setstone(this);"></td>
+      <td id="62" onclick="setstone(this);"></td>
+      <td id="63" onclick="setstone(this);"></td>
+      <td id="64" onclick="setstone(this);"></td>
+      <td id="65" onclick="setstone(this);"></td>
+      <td id="66" onclick="setstone(this);"></td>
+      <td id="67" onclick="setstone(this);"></td>
+      <td id="68" onclick="setstone(this);"></td>
+    </tr>
+    <tr>
+      <td id="71" onclick="setstone(this);"></td>
+      <td id="72" onclick="setstone(this);"></td>
+      <td id="73" onclick="setstone(this);"></td>
+      <td id="74" onclick="setstone(this);"></td>
+      <td id="75" onclick="setstone(this);"></td>
+      <td id="76" onclick="setstone(this);"></td>
+      <td id="77" onclick="setstone(this);"></td>
+      <td id="78" onclick="setstone(this);"></td>
+    </tr>
+    <tr>
+      <td id="81" onclick="setstone(this);"></td>
+      <td id="82" onclick="setstone(this);"></td>
+      <td id="83" onclick="setstone(this);"></td>
+      <td id="84" onclick="setstone(this);"></td>
+      <td id="85" onclick="setstone(this);"></td>
+      <td id="86" onclick="setstone(this);"></td>
+      <td id="87" onclick="setstone(this);"></td>
+      <td id="88" onclick="setstone(this);"></td>
+    </tr>
+  </table>
+  <script src="Othello.js"></script>
+</body>
