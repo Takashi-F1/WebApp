@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="ja">
 <style media="screen">
-  table,td {
+  table,
+  td {
     border: solid 1px #aaaaaa;
     border-collapse: collapse;
     text-align: center;
   }
-  td{
-    width:50px;
+
+  td {
+    width: 50px;
     height: 50px;
   }
 </style>
+
 <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>リバーシ対戦</title>
 </head>
+
 <body>
   <div id="test"></div>
-  <h1>オセロ対戦ページ！</h1>
-  <h2>先攻は〇　後攻は✖</h2>
+  <h1>リバーシ対戦ページ！</h1>
+  <h3>プレイヤー1（先攻）：○　プレイヤー2（後攻）：●</h3>
+  <p>○： <span id=num_p1>2</span>個　●： <span id=num_p2>2</span>個</p>
+  <p>空きセル：<span id=empty>60</span>個</p>
   <h3>プレイヤー<span id="player">1</span>の番です</h3>
   <table>
     <tr>
@@ -56,7 +62,7 @@
       <td id="42" onclick="setstone(this);"></td>
       <td id="43" onclick="setstone(this);"></td>
       <td id="44" onclick="setstone(this);">〇</td>
-      <td id="45" onclick="setstone(this);">✖</td>
+      <td id="45" onclick="setstone(this);">●</td>
       <td id="46" onclick="setstone(this);"></td>
       <td id="47" onclick="setstone(this);"></td>
       <td id="48" onclick="setstone(this);"></td>
@@ -65,7 +71,7 @@
       <td id="51" onclick="setstone(this);"></td>
       <td id="52" onclick="setstone(this);"></td>
       <td id="53" onclick="setstone(this);"></td>
-      <td id="54" onclick="setstone(this);">✖</td>
+      <td id="54" onclick="setstone(this);">●</td>
       <td id="55" onclick="setstone(this);">〇</td>
       <td id="56" onclick="setstone(this);"></td>
       <td id="57" onclick="setstone(this);"></td>
