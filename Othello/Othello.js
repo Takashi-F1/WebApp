@@ -21,7 +21,6 @@ function count_stone() {
   document.getElementById("num_p1").innerText = count_P1;
   document.getElementById("num_p2").innerText = count_P2;
   document.getElementById("empty").innerText = count_empty;
-
 }
 
 /*check cell*/
@@ -32,6 +31,7 @@ function check_cell(selected) {
   var cell = document.getElementById(cellid).innerText;
   var CheckOppCell;
   var CheckMyCell;
+  var result_List = [];
 
   /*check setting possibility */
   if (!cell) { //選択したセルが空か確認
@@ -45,7 +45,7 @@ function check_cell(selected) {
         parseInt(CheckOppCell.slice(0, 1)) < 1 || parseInt(CheckOppCell.slice(0, 1)) > 8) { //盤面外の場合はbreakして次のdirectionを確認
         if (i == 7) {
           //alert("このマスには置けません。");
-          return [-1, -1];
+          result_List.push([-1, -1]);
         }
         continue;
       }
@@ -70,7 +70,7 @@ function check_cell(selected) {
               // }
               //document.getElementById("player").innerText = playernum % 2 + 1;
               //break CheckLoop; //置けるなら周囲の確認終了
-              return [i, j];
+              result_List.push([i, j]);
             }
           } else {//CheckMyCell_valueが空セルの場合、その方向はチェックする必要ない
             //alert("この方向には自分の石がありません");
@@ -80,52 +80,80 @@ function check_cell(selected) {
       }
       if (i == 7) {
         //alert("このマスには置けません。");
-        return [-1, -1];
+        result_List.push([-1, -1]);
       }
     }
   } else { //選択したセルにすでに置かれている
     //alert("この場所にはすでに置かれています！　別の場所を選択してください");
-    return [-1, -1];
+    result_List.push([-1, -1]);
   }
+  // alert(result_List)
+  return result_List;
 }
 
-function all_check(){
+function all_check() {
   var cell_list = document.getElementsByTagName("td");
-  //console.log(cell_list)
+  console.log(cell_list);
   var count_ok = 0;//置くことができるセル数
 
   for (c = 0; c < cell_list.length; c++) {//cell_list.length=64
-    if (check_cell(cell_list[c])[0] > 0) {
-      count_ok++;
+    var check_func = check_cell(cell_list[c]);
+    
+    for (a = 0; a < check_func.length; a++) {
+      if (check_func[a].some(item=>item>=0)) {
+        count_ok++;
+        break;
+      }
     }
   }
+
   document.getElementById("num_ok").innerText = count_ok;
+  if (count_ok == 0) {
+    alert("プレイヤー" + document.getElementById("player").innerText + "： 現在どこのマスにも置くことができません！");
+    document.getElementById("player").innerText = document.getElementById("player").innerText % 2 + 1;
+  }
 }
 
 /*set stone*/
 function setstone(selected) {
-  var check_func = check_cell(selected);
-  var i = check_func[0];
-  var j = check_func[1];
+  var check_List = check_cell(selected);
   var playernum = document.getElementById("player").innerText;
-  //alert(i+" "+j);
-  if (i < 0) {
-    alert("このマスには置けません！　別のマスを選択してください");
-  } else if (i >= 0) {
-    for (var k = 0; k <= j; k++) {
-      /*選択されたセルに石を置く＆挟んだ相手の石の色を変える*/
-      document.getElementById(String(parseInt(selected.id) + direction[i] * k)).innerText = SymbolList[playernum - 1];
+  var dum = 0;
+
+  for (d = 0; d < check_List.length; d++) {
+    var i = check_List[d][0];
+    var j = check_List[d][1];
+    // alert("i="+i+" j="+j);
+
+    if (i >= 0) {
+      for (var k = 0; k <= j; k++) {
+        /*選択されたセルに石を置く＆挟んだ相手の石の色を変える*/
+        document.getElementById(String(parseInt(selected.id) + direction[i] * k)).innerText = SymbolList[playernum - 1];
+      }
+      document.getElementById("player").innerText = playernum % 2 + 1;
+      dum++;
     }
-    document.getElementById("player").innerText = playernum % 2 + 1;
+    if (dum == 0) {
+      alert("このマスには置けません！ 別のマスを選択してください");
+    }
   }
   count_stone();
   all_check();
+  judge();
 }
-
 
 /*置ける場所がない時はパス*/
-if(document.getElementById("num_ok").innerText=="0"){
-  alert("プレイヤー"+document.getElementById("player").innerText+"：　現在どこのマスにも置くことができません！")
-}
+
 
 /*勝利判定 */
+function judge(){
+  if (document.getElementById("empty").innerText == "0" || document.getElementById("num_p1").innerText == "0" || document.getElementById("num_p2").innerText == "0") {
+    var count_P1 = String(document.getElementById("num_p1").innerText);
+    var count_P2 = String(document.getElementById("num_p2").innerText);
+    if (count_P1 > count_P2) {
+      alert("ゲーム終了\nプレイヤー1の勝ちです！");
+    } else if (count_P2 > count_P1) {
+      alert("ゲーム終了\nプレイヤー2の勝ちです！");
+    }
+  }
+}
