@@ -71,6 +71,7 @@ function check_cell(selected) {
               //document.getElementById("player").innerText = playernum % 2 + 1;
               //break CheckLoop; //置けるなら周囲の確認終了
               result_List.push([i, j]);
+              break;
             }
           } else {//CheckMyCell_valueが空セルの場合、その方向はチェックする必要ない
             //alert("この方向には自分の石がありません");
@@ -93,7 +94,7 @@ function check_cell(selected) {
 
 function all_check() {
   var cell_list = document.getElementsByTagName("td");
-  console.log(cell_list);
+  //console.log(cell_list);
   var count_ok = 0;//置くことができるセル数
 
   for (c = 0; c < cell_list.length; c++) {//cell_list.length=64
@@ -108,8 +109,13 @@ function all_check() {
   }
 
   document.getElementById("num_ok").innerText = count_ok;
-  if (count_ok == 0) {
-    alert("プレイヤー" + document.getElementById("player").innerText + "： 現在どこのマスにも置くことができません！");
+
+  
+/*置ける場所がない時はパス*/
+
+  if (count_ok == 0 &&document.getElementById("empty").innerText!="0" ) {
+    //前のプレイヤーが置いた石が反映される前にalertが出てしまうのを調整するためにsetTimeout
+    setTimeout(function(){alert("プレイヤー" + document.getElementById("player").innerText + "： 現在どこのマスにも置くことができません！")},1);
     document.getElementById("player").innerText = document.getElementById("player").innerText % 2 + 1;
   }
 }
@@ -119,12 +125,16 @@ function setstone(selected) {
   var check_List = check_cell(selected);
   var playernum = document.getElementById("player").innerText;
   var dum = 0;
+  console.log("---------------------------------------------------------")
+  console.log("CheckList"+check_List)
 
   for (d = 0; d < check_List.length; d++) {
+    console.log("for (d = 0; d < check_List.length; d++)")
     var i = check_List[d][0];
     var j = check_List[d][1];
     // alert("i="+i+" j="+j);
-
+    console.log("i="+i+" j="+j)
+    console.log("check_List[d]="+check_List[d])
     if (i >= 0) {
       for (var k = 0; k <= j; k++) {
         /*選択されたセルに石を置く＆挟んだ相手の石の色を変える*/
@@ -141,8 +151,6 @@ function setstone(selected) {
   all_check();
   judge();
 }
-
-/*置ける場所がない時はパス*/
 
 
 /*勝利判定 */
