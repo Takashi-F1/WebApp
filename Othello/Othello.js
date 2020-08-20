@@ -1,5 +1,5 @@
 var direction = [-11, -10, -9, -1, 1, 9, 10, 11];
-var SymbolList = ["〇", "●"];
+var SymbolList = ["<img src='./white.png'>", "<img src='./blackstone.png'>"];
 
 /*count*/
 function count_stone() {
@@ -10,9 +10,9 @@ function count_stone() {
     for (y = 1; y < 9; y++) {
       var cell_id = String(x) + String(y);
       var cell = document.getElementById(cell_id).innerText;
-      if (cell == "〇") {
+      if (cell == SymbolList[0]) {
         count_P1++;
-      } else if (cell == "●") {
+      } else if (cell == SymbolList[1]) {
         count_P2++;
       }
     }
