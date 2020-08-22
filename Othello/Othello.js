@@ -1,18 +1,8 @@
 var direction = [-11, -10, -9, -1, 1, 9, 10, 11];
 // var SymbolList = ["<img src='./white.png'>", "<img src='./blackstone.png'>"];
-var SymbolList = ["white","black"];
+var SymbolList = ["white", "black"];
 function test(dum) {
-  // document.getElementById("testfunc").insertAdjacentHTML('afterbegin',"<span style='color: red;'>span要素に変更したよ！</span>");
-  document.getElementById("testfunc").innerHTML=SymbolList[1];
-  // alert(document.getElementById("testfunc").className=="");
-  // document.getElementById("testfunc").className="black";
-  // alert(document.getElementById("testfunc").className==SymbolList[0]);
-  var cell = document.getElementsByTagName("td");
-  console.log(cell);
-  for (c = 0; c < cell.length; c++) {
-    console.log("c=" + c + "  className= " + cell[c].className);
-  }
-
+  document.getElementById("anounce").innerHTML="<span class='result'>プレイヤー1の勝ちです！！</span>"
 }
 /*count*/
 function count_stone() {
@@ -121,13 +111,6 @@ function all_check() {
     }
   }
   document.getElementById("num_ok").innerText = count_ok;
-
-  /*置ける場所がない時はパス*/
-  if (count_ok == 0 && document.getElementById("empty").innerText != "0") {
-    //前のプレイヤーが置いた石が反映される前にalertが出てしまうのを調整するためにsetTimeout
-    setTimeout(function () { alert("プレイヤー" + document.getElementById("player").innerText + "： 現在どこのマスにも置くことができません！") }, 1);
-    document.getElementById("player").innerText = document.getElementById("player").innerText % 2 + 1;
-  }
 }
 
 /*set stone*/
@@ -165,24 +148,32 @@ function set_stone(selected) {
 
 function insert_img() {
   var cell_list = document.getElementsByTagName("td");
-  for (c=0;c<cell_list.length;c++){
-    if(cell_list[c].className==SymbolList[0]){
-      document.getElementById(cell_list[c].id).innerHTML="<img src='./white.png'>"
-    }else if(cell_list[c].className==SymbolList[1]){
-      document.getElementById(cell_list[c].id).innerHTML="<img src='./blackstone.png'>"
+  for (c = 0; c < cell_list.length; c++) {
+    if (cell_list[c].className == SymbolList[0]) {
+      document.getElementById(cell_list[c].id).innerHTML = "<img src='./white.png'>"
+    } else if (cell_list[c].className == SymbolList[1]) {
+      document.getElementById(cell_list[c].id).innerHTML = "<img src='./blackstone.png'>"
     }
   }
 }
 
 /*勝利判定 */
 function judge() {
+  /*置ける場所がない時はパス*/
+  if (document.getElementById("num_ok").innerText == 0 && document.getElementById("empty").innerText != "0") {
+    //前のプレイヤーが置いた石が反映される前にalertが出てしまうのを調整するためにsetTimeout
+    setTimeout(function () { alert("プレイヤー" + document.getElementById("player").innerText + "： 現在どこのマスにも置くことができません！") }, 1);
+    document.getElementById("player").innerText = document.getElementById("player").innerText % 2 + 1;
+  }
   if (document.getElementById("empty").innerText == "0" || document.getElementById("num_p1").innerText == "0" || document.getElementById("num_p2").innerText == "0") {
     var count_P1 = String(document.getElementById("num_p1").innerText);
     var count_P2 = String(document.getElementById("num_p2").innerText);
     if (count_P1 > count_P2) {
-      alert("ゲーム終了\nプレイヤー1の勝ちです！");
+      setTimeout(function () { alert("ゲーム終了\nプレイヤー1の勝ちです！"); }, 1);
+      document.getElementById("anounce").innerHTML="<span class='result'>プレイヤー1の勝ちです！！</span>"
     } else if (count_P2 > count_P1) {
-      alert("ゲーム終了\nプレイヤー2の勝ちです！");
+      setTimeout(function () { alert("ゲーム終了\nプレイヤー2の勝ちです！"); }, 1);
+      document.getElementById("anounce").innerHTML="<span class='result'>プレイヤー2の勝ちです！！</span>"
     }
   }
 }
@@ -190,8 +181,8 @@ function judge() {
 function main(selected) {
   set_stone(selected);
   insert_img();
-  count_stone();
   all_check();
+  count_stone();
   judge();
 }
 
