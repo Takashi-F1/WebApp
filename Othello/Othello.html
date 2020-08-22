@@ -1,120 +1,144 @@
 <!DOCTYPE html>
 <html lang="ja">
-<style media="screen">
-  table,
-  td {
-    border: solid 1px #aaaaaa;
-    border-collapse: collapse;
-    text-align: center;
-  }
-
-  td {
-    width: 50px;
-    height: 50px;
-  }
-</style>
 
 <head>
   <meta charset="UTF-8">
   <title>リバーシ対戦</title>
-  <style>
+  <style media="screen">
+    body {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      border: solid 1px;
+      width: 90%;
+      min-width:700px;
+    }
+
     table {
-      border: solid;
-      border-width: 10px;
-    },
-    p{}
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      border: solid 20px;
+      /* border-collapse: collapse; */
+      width: 90%; /*bodyの幅の90%*/
+      min-width: 600px;
+      max-width: 800px;
+      height: 600px;
+    }
+
+    td {
+      border: dotted 1px #aaaaaa;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    img {
+      width: 80%;
+      /* height: 30%; imgのheightは自動で調整されるぽい*/
+    }
+
+    .null {
+      opacity: 0.0;
+    }
   </style>
 </head>
 
 <body>
   <div id="test"></div>
   <h1>リバーシ対戦ページ！</h1>
-  <h3>プレイヤー1（先攻）：○　プレイヤー2（後攻）：●</h3>
-  <p>○： <span id=num_p1>2</span>個　●： <span id=num_p2>2</span>個</p>
-  <p>空のマス：<span id=empty>60</span>個</p>
-  <p>置けるマス：<span id=num_ok>4</span>個</p>
-  <h3>プレイヤー<span id="player">1</span>の番です</h3>
+  <h3><span style="margin-right: 30px;">プレイヤー1（先攻）：○</span> プレイヤー2（後攻）：●</h3>
+  <p>○： <span id=num_p1>2</span>個 <span style="margin-left: 30px;">●： </span><span id=num_p2>2</span>個
+    <!-- <span style="margin-left: 30px;">空いているマス：</span><span id=empty>60</span>個 -->
+  </p>
+  <h3>＊プレイヤー<span id="player">1</span>の番です＊</h3>
+  <!-- <h4>置けるマス：<span id=num_ok>4</span>個</h4> -->
+  <!-- <p id=testfunc>okmn</p> -->
+  <!-- <img id="img1" src="./white.png" onclick="insert_img();" />
+  <button id="button1" type="button" onclick="test(this);">test start</button> -->
+
   <table background="./green.jpg">
     <tr>
-      <td id="11" onclick="setstone(this);"></td>
-      <td id="12" onclick="setstone(this);"></td>
-      <td id="13" onclick="setstone(this);"></td>
-      <td id="14" onclick="setstone(this);"></td>
-      <td id="15" onclick="setstone(this);"></td>
-      <td id="16" onclick="setstone(this);"></td>
-      <td id="17" onclick="setstone(this);"></td>
-      <td id="18" onclick="setstone(this);"></td>
+      <td id="11" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="12" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="13" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="14" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="15" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="16" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="17" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="18" onclick="main(this);"><img class="null" src="./white.png" /></td>
     </tr>
     <tr>
-      <td id="21" onclick="setstone(this);"></td>
-      <td id="22" onclick="setstone(this);"></td>
-      <td id="23" onclick="setstone(this);"></td>
-      <td id="24" onclick="setstone(this);"></td>
-      <td id="25" onclick="setstone(this);"></td>
-      <td id="26" onclick="setstone(this);"></td>
-      <td id="27" onclick="setstone(this);"></td>
-      <td id="28" onclick="setstone(this);"></td>
+      <td id="21" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="22" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="23" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="24" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="25" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="26" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="27" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="28" onclick="main(this);"><img class="null" src="./white.png" /></td>
     </tr>
     <tr>
-      <td id="31" onclick="setstone(this);"></td>
-      <td id="32" onclick="setstone(this);"></td>
-      <td id="33" onclick="setstone(this);"></td>
-      <td id="34" onclick="setstone(this);"></td>
-      <td id="35" onclick="setstone(this);"></td>
-      <td id="36" onclick="setstone(this);"></td>
-      <td id="37" onclick="setstone(this);"></td>
-      <td id="38" onclick="setstone(this);"></td>
+      <td id="31" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="32" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="33" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="34" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="35" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="36" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="37" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="38" onclick="main(this);"><img class="null" src="./white.png" /></td>
     </tr>
     <tr>
-      <td id="41" onclick="setstone(this);"></td>
-      <td id="42" onclick="setstone(this);"></td>
-      <td id="43" onclick="setstone(this);"></td>
-      <td id="44" onclick="setstone(this);" ><img src="./white.png"></td>
-      <td id="45" onclick="setstone(this);"><img src="./blackstone.png"></td>
-      <td id="46" onclick="setstone(this);"></td>
-      <td id="47" onclick="setstone(this);"></td>
-      <td id="48" onclick="setstone(this);"></td>
+      <td id="41" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="42" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="43" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="44" onclick="main(this);" class="white"><img src="./white.png" /></td>
+      <td id="45" onclick="main(this);" class="black"><img src="./blackstone.png" /></td>
+      <td id="46" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="47" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="48" onclick="main(this);"><img class="null" src="./white.png" /></td>
     </tr>
     <tr>
-      <td id="51" onclick="setstone(this);"></td>
-      <td id="52" onclick="setstone(this);"></td>
-      <td id="53" onclick="setstone(this);"></td>
-      <td id="54" onclick="setstone(this);"><img src="./blackstone.png"></td>
-      <td id="55" onclick="setstone(this);"><img src="./white.png"></td>
-      <td id="56" onclick="setstone(this);"></td>
-      <td id="57" onclick="setstone(this);"></td>
-      <td id="58" onclick="setstone(this);"></td>
+      <td id="51" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="52" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="53" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="54" onclick="main(this);" class="black"><img src="./blackstone.png" /></td>
+      <td id="55" onclick="main(this);" class="white"><img src="./white.png" /></td>
+      <td id="56" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="57" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="58" onclick="main(this);"><img class="null" src="./white.png" /></td>
     </tr>
     <tr>
-      <td id="61" onclick="setstone(this);"></td>
-      <td id="62" onclick="setstone(this);"></td>
-      <td id="63" onclick="setstone(this);"></td>
-      <td id="64" onclick="setstone(this);"></td>
-      <td id="65" onclick="setstone(this);"></td>
-      <td id="66" onclick="setstone(this);"></td>
-      <td id="67" onclick="setstone(this);"></td>
-      <td id="68" onclick="setstone(this);"></td>
+      <td id="61" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="62" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="63" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="64" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="65" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="66" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="67" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="68" onclick="main(this);"><img class="null" src="./white.png" /></td>
     </tr>
     <tr>
-      <td id="71" onclick="setstone(this);"></td>
-      <td id="72" onclick="setstone(this);"></td>
-      <td id="73" onclick="setstone(this);"></td>
-      <td id="74" onclick="setstone(this);"></td>
-      <td id="75" onclick="setstone(this);"></td>
-      <td id="76" onclick="setstone(this);"></td>
-      <td id="77" onclick="setstone(this);"></td>
-      <td id="78" onclick="setstone(this);"></td>
+      <td id="71" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="72" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="73" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="74" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="75" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="76" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="77" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="78" onclick="main(this);"><img class="null" src="./white.png" /></td>
     </tr>
     <tr>
-      <td id="81" onclick="setstone(this);"></td>
-      <td id="82" onclick="setstone(this);"></td>
-      <td id="83" onclick="setstone(this);"></td>
-      <td id="84" onclick="setstone(this);"></td>
-      <td id="85" onclick="setstone(this);"></td>
-      <td id="86" onclick="setstone(this);"></td>
-      <td id="87" onclick="setstone(this);"></td>
-      <td id="88" onclick="setstone(this);"></td>
+      <td id="81" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="82" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="83" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="84" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="85" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="86" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="87" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      <td id="88" onclick="main(this);"><img class="null" src="./white.png" /></td>
     </tr>
   </table>
   <script src="Othello.js"></script>
 </body>
+
+</html>

@@ -1,6 +1,19 @@
 var direction = [-11, -10, -9, -1, 1, 9, 10, 11];
-var SymbolList = ["<img src='./white.png'>", "<img src='./blackstone.png'>"];
+// var SymbolList = ["<img src='./white.png'>", "<img src='./blackstone.png'>"];
+var SymbolList = ["white","black"];
+function test(dum) {
+  // document.getElementById("testfunc").insertAdjacentHTML('afterbegin',"<span style='color: red;'>span要素に変更したよ！</span>");
+  document.getElementById("testfunc").innerHTML=SymbolList[1];
+  // alert(document.getElementById("testfunc").className=="");
+  // document.getElementById("testfunc").className="black";
+  // alert(document.getElementById("testfunc").className==SymbolList[0]);
+  var cell = document.getElementsByTagName("td");
+  console.log(cell);
+  for (c = 0; c < cell.length; c++) {
+    console.log("c=" + c + "  className= " + cell[c].className);
+  }
 
+}
 /*count*/
 function count_stone() {
   var count_P1 = 0;
@@ -9,10 +22,10 @@ function count_stone() {
   for (x = 1; x < 9; x++) {
     for (y = 1; y < 9; y++) {
       var cell_id = String(x) + String(y);
-      var cell = document.getElementById(cell_id).innerText;
-      if (cell == SymbolList[0]) {
+      var cell_class = document.getElementById(cell_id).className;
+      if (cell_class == SymbolList[0]) {
         count_P1++;
-      } else if (cell == SymbolList[1]) {
+      } else if (cell_class == SymbolList[1]) {
         count_P2++;
       }
     }
@@ -28,7 +41,7 @@ function check_cell(selected) {
   //選択されたセルに置くことができない場合は[-1,-1]を、置ける場合はdirection[i]のインデックスiと、自分のマスまでのセル数jを配列[i,j]で返す。
   var playernum = document.getElementById("player").innerText;
   var cellid = selected.id;
-  var cell = document.getElementById(cellid).innerText;
+  var cell = document.getElementById(cellid).className;
   var CheckOppCell;
   var CheckMyCell;
   var result_List = [];
@@ -51,7 +64,7 @@ function check_cell(selected) {
       }
 
       //alert("neighbor" + (i + 1) + "の確認");
-      neighbor[i] = document.getElementById(CheckOppCell).innerText;
+      neighbor[i] = document.getElementById(CheckOppCell).className;
       if (neighbor[i] == SymbolList[playernum % 2]) { //周囲8方向に相手の石があった場合
         for (var j = 2; j < 8; j++) {
           /*その方向の先に自分の石があるか確認*/
@@ -61,7 +74,7 @@ function check_cell(selected) {
             parseInt(CheckMyCell.slice(0, 1)) < 1 || parseInt(CheckMyCell.slice(0, 1)) > 8) {  //盤面外はbreak
             break;
           }
-          CheckMyCell_value = document.getElementById(CheckMyCell).innerText;
+          CheckMyCell_value = document.getElementById(CheckMyCell).className;
           if (CheckMyCell_value !== "") { //CheckMyCell_valueが空じゃない場合
             if (CheckMyCell_value == SymbolList[playernum - 1]) {//自分の石が見つかった場合
               // for (var k = 0; k <= j; k++) {
@@ -85,7 +98,7 @@ function check_cell(selected) {
       }
     }
   } else { //選択したセルにすでに置かれている
-    //alert("この場所にはすでに置かれています！　別の場所を選択してください");
+    //alert("この場所にはすでに置かれています！別の場所を選択してください");
     result_List.push([-1, -1]);
   }
   // alert(result_List)
@@ -99,46 +112,43 @@ function all_check() {
 
   for (c = 0; c < cell_list.length; c++) {//cell_list.length=64
     var check_func = check_cell(cell_list[c]);
-    
+
     for (a = 0; a < check_func.length; a++) {
-      if (check_func[a].some(item=>item>=0)) {
+      if (check_func[a].some(item => item >= 0)) {
         count_ok++;
         break;
       }
     }
   }
-
   document.getElementById("num_ok").innerText = count_ok;
 
-  
-/*置ける場所がない時はパス*/
-
-  if (count_ok == 0 &&document.getElementById("empty").innerText!="0" ) {
+  /*置ける場所がない時はパス*/
+  if (count_ok == 0 && document.getElementById("empty").innerText != "0") {
     //前のプレイヤーが置いた石が反映される前にalertが出てしまうのを調整するためにsetTimeout
-    setTimeout(function(){alert("プレイヤー" + document.getElementById("player").innerText + "： 現在どこのマスにも置くことができません！")},1);
+    setTimeout(function () { alert("プレイヤー" + document.getElementById("player").innerText + "： 現在どこのマスにも置くことができません！") }, 1);
     document.getElementById("player").innerText = document.getElementById("player").innerText % 2 + 1;
   }
 }
 
 /*set stone*/
-function setstone(selected) {
+function set_stone(selected) {
   var check_List = check_cell(selected);
   var playernum = document.getElementById("player").innerText;
   var dum = 0;
   console.log("---------------------------------------------------------")
-  console.log("CheckList"+check_List)
+  console.log("CheckList" + check_List)
 
   for (d = 0; d < check_List.length; d++) {
     console.log("for (d = 0; d < check_List.length; d++)")
     var i = check_List[d][0];
     var j = check_List[d][1];
     // alert("i="+i+" j="+j);
-    console.log("i="+i+" j="+j)
-    console.log("check_List[d]="+check_List[d])
+    console.log("i=" + i + " j=" + j)
+    console.log("check_List[d]=" + check_List[d])
     if (i >= 0) {
       for (var k = 0; k <= j; k++) {
         /*選択されたセルに石を置く＆挟んだ相手の石の色を変える*/
-        document.getElementById(String(parseInt(selected.id) + direction[i] * k)).innerText = SymbolList[playernum - 1];
+        document.getElementById(String(parseInt(selected.id) + direction[i] * k)).className = SymbolList[playernum - 1];
       }
       document.getElementById("player").innerText = playernum % 2 + 1;
       dum++;
@@ -147,14 +157,25 @@ function setstone(selected) {
       alert("このマスには置けません！ 別のマスを選択してください");
     }
   }
-  count_stone();
-  all_check();
-  judge();
+  // count_stone();
+  // all_check();
+  // insert_img();
+  // judge();
 }
 
+function insert_img() {
+  var cell_list = document.getElementsByTagName("td");
+  for (c=0;c<cell_list.length;c++){
+    if(cell_list[c].className==SymbolList[0]){
+      document.getElementById(cell_list[c].id).innerHTML="<img src='./white.png'>"
+    }else if(cell_list[c].className==SymbolList[1]){
+      document.getElementById(cell_list[c].id).innerHTML="<img src='./blackstone.png'>"
+    }
+  }
+}
 
 /*勝利判定 */
-function judge(){
+function judge() {
   if (document.getElementById("empty").innerText == "0" || document.getElementById("num_p1").innerText == "0" || document.getElementById("num_p2").innerText == "0") {
     var count_P1 = String(document.getElementById("num_p1").innerText);
     var count_P2 = String(document.getElementById("num_p2").innerText);
@@ -165,3 +186,12 @@ function judge(){
     }
   }
 }
+
+function main(selected) {
+  set_stone(selected);
+  insert_img();
+  count_stone();
+  all_check();
+  judge();
+}
+
