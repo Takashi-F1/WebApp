@@ -1,10 +1,12 @@
-﻿@page
+﻿@page 
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "ホーム";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">初めてのRazor Pages!</h1>
+    <p>このWebサイトは映画のデータベースです</p>
+    <a asp-page="Movies/Index">映画リスト</a>
 </div>
+<a asp-page="Movies/Index">映画リスト</a>

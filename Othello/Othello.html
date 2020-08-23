@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>リバーシ対戦</title>
+  <style media="screen">
+    body {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      /* border: solid 1px; */
+      width: 60%;
+      min-width: 700px;
+      background-image: url("./bali2.jpg");
+      background-size: cover;
+    }
+
+    .disp1 {
+      background-color: white;
+      border: double 7px #0cf13a;
+    }
+
+    table {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      border: solid 20px;
+      border-collapse: collapse;
+      width: 90%;
+      /*bodyの幅の90%*/
+      min-width: 600px;
+      max-width: 800px;
+      height: 600px;
+      background-image: url("./green.jpg");
+    }
+
+    td {
+      border: solid 1px #aaaaaa;
+      text-align: center;
+    }
+
+    img {
+      width: 80%;
+      /* height: 30%; imgのheightは自動で調整されるぽい*/
+    }
+
+    .null {
+      opacity: 0.0;
+    }
+
+    .result {
+      color: red;
+      background-color: white;
+      padding: 20px;
+    }
+
+    footer {
+      color: white;
+      background-color: darkgoldenrod;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="disp1">
+    <h1>リバーシ対戦ページ！</h1>
+    <h3><span style="margin-right: 30px;">プレイヤー1（先攻）：○</span> プレイヤー2（後攻）：●</h3>
+    <p>○： <span id=num_p1>2</span>個 <span style="margin-left: 30px;">●： </span><span id=num_p2>2</span>個
+      <span style="margin-left: 30px;">空いているマス：</span><span id=empty>60</span>個
+    </p>
+    <h3 id="anounce">＊プレイヤー<span id="player">1</span>の番です＊</h3>
+    <h4>置けるマス：<span id=num_ok>4</span>個</h4>
+    <!-- <p id=testfunc>okmn</p> -->
+    <!-- <img id="img1" src="./white.png" onclick="insert_img();" /> -->
+    <!-- <button id="button1" type="button" onclick="test(this);">test start</button> -->
+    <table>
+      <tr>
+        <td id="11" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="12" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="13" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="14" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="15" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="16" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="17" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="18" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      </tr>
+      <tr>
+        <td id="21" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="22" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="23" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="24" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="25" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="26" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="27" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="28" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      </tr>
+      <tr>
+        <td id="31" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="32" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="33" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="34" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="35" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="36" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="37" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="38" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      </tr>
+      <tr>
+        <td id="41" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="42" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="43" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="44" onclick="main(this);" class="white"><img src="./white.png" /></td>
+        <td id="45" onclick="main(this);" class="black"><img src="./blackstone.png" /></td>
+        <td id="46" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="47" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="48" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      </tr>
+      <tr>
+        <td id="51" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="52" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="53" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="54" onclick="main(this);" class="black"><img src="./blackstone.png" /></td>
+        <td id="55" onclick="main(this);" class="white"><img src="./white.png" /></td>
+        <td id="56" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="57" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="58" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      </tr>
+      <tr>
+        <td id="61" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="62" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="63" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="64" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="65" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="66" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="67" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="68" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      </tr>
+      <tr>
+        <td id="71" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="72" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="73" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="74" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="75" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="76" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="77" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="78" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      </tr>
+      <tr>
+        <td id="81" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="82" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="83" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="84" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="85" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="86" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="87" onclick="main(this);"><img class="null" src="./white.png" /></td>
+        <td id="88" onclick="main(this);"><img class="null" src="./white.png" /></td>
+      </tr>
+    </table>
+  </div>
+  <script src="Othello.js"></script>
+</body>
+<footer>
+  <p>© All rights reserved by Takashi Fujimoto.</p>
+</footer>
+
+</html>
