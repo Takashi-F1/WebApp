@@ -15,7 +15,6 @@
        border: solid 5px rgb(211, 208, 208);
        padding: 15px;
        /* background-image: url("../Othello/bali2.jpg"); */
-       /* background-color: green; */
    }
    
    table,
@@ -45,14 +44,28 @@
    button {
        background-color: #00bfff;
        color: white;
+       font-weight: bold;
        border-style: none;
        border-radius: 10px;
+        /* Safari&Chrome対応*/
        -webkit-border-radius: 10px;
-       /* for Safari and Chrome 対応*/
-       -moz-border-radius: 10px;
-       /* for Firefox 対応*/
+       /* マウス合わせで半透明に */
+       transition-property: opacity;
+       -webkit-transition-property: opacity;
+       transition-duration: .5s;
+       -webkit-transition-duration: .5s;
+      
+   }
+
+   button:hover{
+       opacity: 0.5;
    }
    
+   #note{
+       color:grey;
+       text-align:right;       
+   }
+
    .comment {
        width: 300pt;
        text-align: left;
