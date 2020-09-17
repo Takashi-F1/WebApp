@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Vue.js Todolist</title>
+    <link rel="stylesheet" href="Todolist.css">
+</head>
+
+<body>
+    <div id="frame">
+        <header>To Do List</header>
+
+        <div id="app">
+            <!-- <pre>{{$data}}</pre> -->
+            <label><input type="radio" value="すべて" v-model="showState">すべて</label>
+            <label><input type="radio" value="作業中" v-model="showState">作業中</label>
+            <label><input type="radio" value="完了" v-model="showState">完了</label> ({{matched.length}}件を表示）
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>comment</th>
+                        <th>state</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item,index) in matched" v-bind:key="item.id" v-bind:class="{doneClass:item.done}">
+                        <td>{{index}}</td>
+                        <td class="comment">{{item.comment}}</td>
+                        <td><button v-on:click="changeState(index)">{{named(index)}}</button></td>
+                        <td> <button v-on:click.ctrl="removeList(index)">削除</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h5 id="note">※削除:ctrキーを押しながらクリック</h5>
+            <h3>新しい作業の追加</h3>
+            コメント<input v-model="comment">
+
+            <button v-on:click="addList">追加</button>
+        </div>
+        <br><br><br><br>
+
+        <footer>
+            <p>© All rights reserved by TakashiFujimoto</p>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+        <script src="Todolist.js"></script>
+    </div>
+</body>
+
+</html>

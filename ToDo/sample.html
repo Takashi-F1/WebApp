@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js App</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <div id="app">
+    <!-- <template v-if="ok">
+      <header>
+        ヘッダー
+      </header>
+      <p>コンテンツ</p>
+    </template> -->
+
+    <pre>{{$data}}</pre>
+    <!-- テキストコンテンツは{{}}で挟む -->
+    <!-- <p>{{list[0]}}</p>
+    <p>{{message.value}}</p>
+    <p>{{message.value.length}}</p>
+    <p>{{9+9+9}}</p> -->
+    <!-- <input type="text"  v-bind:value="message.value"> -->
+    <!-- v-bindは省略して、:だけでも書ける -->
+    <!-- <p>{{count}}回クリックしました！</p> -->
+    <!-- <button v-on:click="increment">カウント増やす</button> -->
+    <!-- <p v-bind:class="{child: isChild,'is-active':isActive}">Text</p> -->
+    <!-- <p v-bind:style="{color:textColor,backgroundColor:bgColor}">Text</p> -->
+    <!-- <p v-bind:class="classObject">TEXT</p>
+    <p v-bind:style="styleObject">TEXT</p> -->
+    <!-- <p v-bind="item">1234567890</p> -->
+    <!-- <div v-if="ok">v-if条件による表示</div> -->
+    <!-- <div v-show="ok">v-show条件による表示</div> -->
+
+    <!-- 名前<input v-model="name">
+    <button v-on:click="doAdd">モンスター追加</button> -->
+    <!-- <ul> -->
+      <!-- <li v-for="(item,index) in list" v-bind:key="item.id"> -->
+        <!--  v-if="item.hp"これにより、item.hpが0になると -->
+        <!-- ID.{{item.id}}{{item.name}} HP.{{item.hp}} -->
+        <!-- <span v-if="item.hp>300">強い</span>
+        <span v-if="item.hp<50">瀕死！</span>
+        <button v-on:click="doRemove(index)">モンスター削除</button>
+        <button v-on:click="doAttack(index)">攻撃</button> -->
+        <!-- <button v-on:click="doRecover(index)">回復</button> -->
+      <!-- </li> -->
+    <!-- </ul> -->
+    <!-- <select>
+      <option v-for="item in list">{{item}}</option>
+    </select> -->
+    <!-- <span v-for="item in 15">{{item}}</span> -->
+    <!-- <button v-on:click="handleClick">カウントアップ</button>
+    <button v-on:click="show=!show">表示/非表示</button>
+    <span ref="count" v-if="show">0</span> -->
+    <p v-pre>
+      Hello{{message}}
+    </p>
+    <p v-once>
+      Hello{{message}}
+    </p>
+    <p>
+      Hello{{message}}
+    </p>
+    <p>{{message}}</p>
+    <p>
+      <span v-text="message"></span>
+    </p>
+    <span v-html="message2"></span>
+    <p>{{message2}}</p>
+    <p></p>
+    <button v-on:click="changeMessage">messageを変える</button>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.17.1/dist/axios.min.js"></script>
+
+  <script src="sample.js"></script>
+</body>
+
+</html>
